@@ -1,0 +1,35 @@
+---------- Date: 2023-09-04 08:32:22 ~ IP : ::1 ----------
+REQUEST URI : /2200/admin/index.php?route=module/quote_module&token=0W03vb2oZDR5FDzDdAHwZGwCu9NGmLED
+MOD DETAILS:
+   modFile   : D:\xampp\htdocs\2200\vqmod/xml/e_wallet.xml
+   id        : E Wallet
+   version   : 1.0.0.0
+   vqmver    : 
+   author    : Hitinfotech.com
+VQModObject::parseMods - Could not resolve path for [catalog/controller/extension/module/account.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [system/library/cart.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/event/compatibility.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/common/dashboard.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/journal2/checkout.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/view/theme/journal2/template/journal2/checkout/checkout.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/view/theme/journal2/template/journal2/headers/default.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/view/theme/journal2/template/journal2/headers/default.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/controller/journal3/checkout.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/view/theme/journal3/template/journal3/checkout/checkout.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/view/theme/journal3/template/journal3/headers/desktop/classic.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/view/theme/journal3/template/account/account.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [catalog/view/theme/journal3/template/extension/module/account.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [system/library/template/twig.php] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/catalog/product_form.twig] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [system/library/template/twig.php] (SKIPPED)
+
+File Name    : admin/controller/common/column_left.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $marketing = array();
+
+File Name    : admin/controller/common/column_left.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $customer = array();
+
+----------------------------------------------------------------------
+
+

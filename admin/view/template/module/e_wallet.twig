@@ -1,0 +1,1368 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-e_wallet" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <h1>{{ heading_title }}</h1>
+        <ul class="breadcrumb">
+          {% for breadcrumb in breadcrumbs  %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="container-fluid">
+      {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+      {% endif %}
+       {% if success %}
+        <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+       {% endif %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+        </div>
+        <div class="panel-body">
+          <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-e_wallet">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+              <li><a href="#tab-language" data-toggle="tab">{{ tab_language }}</a></li>
+              <li><a href="#tab-option" data-toggle="tab">{{ tab_option }}</a></li>
+              <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>            
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-general">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-status">{{ entry_status }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_status" id="input-status" class="form-control">
+                          {% if e_wallet_status %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-delete_all_data">{{ entry_delete_all_data }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_delete_on_uninstall" id="input-delete_all_data" class="form-control">
+                          {% if e_wallet_delete_on_uninstall %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-delete_voucher_order">{{ entry_delete_voucher_order }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_delete_voucher_order" id="input-delete_voucher_order" class="form-control">
+                          {% if e_wallet_delete_voucher_order %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else  %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-e_wallet_add_money">{{ add_money }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_add_money" id="input-e_wallet_add_money" class="form-control">
+                          {% if e_wallet_add_money %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-3">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-e_wallet_send_money">{{ send_money }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_send_money" id="input-e_wallet_send_money" class="form-control">
+                          {% if e_wallet_send_money %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-e_wallet_bank_detail">{{ bank_detail }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_bank_detail" id="input-e_wallet_bank_detail" class="form-control">
+                          {% if e_wallet_bank_detail %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-e_wallet_withdraw_requests">{{ withdraw_requests }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_withdraw_requests" id="input-e_wallet_withdraw_requests" class="form-control">
+                          {% if e_wallet_withdraw_requests %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-e_wallet_voucher_status">{{ voucher_status }}</label>
+                      <div class="col-xs-12">
+                        <select name="module_e_wallet_voucher_status" id="input-e_wallet_voucher_status" class="form-control">
+                          {% if e_wallet_voucher_status %}
+                          <option value="1" selected="selected">{{ text_enabled }}</option>
+                          <option value="0">{{ text_disabled }}</option>
+                          {% else %}
+                          <option value="1">{{ text_enabled }}</option>
+                          <option value="0" selected="selected">{{ text_disabled }}</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-language">
+                <ul class="nav nav-tabs" id="language">
+                  {% set active_is = 1 %} 
+                  {% set active_class = '' %} 
+                  {% for language in languages %}
+                  {% set active_class = ( active_is == 1 ) ? 'active' : '' %}
+                  <li class="{{ active_class }}">
+                    <a href="#language{{ language.language_id }}" data-toggle="tab"> <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}"/> {{ language.name }} </a>
+                  </li>
+                  {% set active_is = active_is + 1 %}
+                  {% endfor %}
+                </ul>
+                <div class="tab-content">
+                  {% set active_is = 1 %} 
+                  {% set active_class = '' %} 
+                  {% for language in languages %}
+                  {% set active_class = ( active_is == 1 ) ? 'active' : '' %}
+                  <div class="tab-pane {{ active_class }}" id="language{{language.language_id }}">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group required">
+                        <label class="col-xs-12 control-label" for="input-e_title{{ language.language_id }}">{{ entry_title }}</label>
+                        <div class="col-xs-12">
+                          <input type="text" name="module_e_wallet_language[{{ language.language_id }}][title]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].title : ''}}" placeholder="{{ entry_title }}" id="input-e_title" class="form-control" />
+                          {% if error_title[language.language_id] %}
+                          <div class="text-danger">{{ error_title[language.language_id] }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group required">
+                        <label class="col-xs-12 control-label" for="input-acc_title{{ language.language_id }}">{{ entry_e_account_title }}</label>
+                        <div class="col-xs-12">
+                          <input type="text" name="module_e_wallet_language[{{ language.language_id }}][e_account_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].e_account_text : '' }}" placeholder="{{ entry_e_account_title }}" id="input-acc_title" class="form-control" />
+                          {% if error_e_account_text[language.language_id] %}
+                          <div class="text-danger">{{ error_e_account_text[language.language_id] }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xs-12 col-sm-2">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-add-money-title{{ language.language_id }}">{{ entry_add_money_title }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{language.language_id}}][add_money_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_money_text : ''  }}" placeholder="{{ entry_add_money_title }}" id="input-add-money-title" class="form-control" />
+                            {% if error_add_money_text[language.language_id] %}
+                            <div class="text-danger">{{ error_add_money_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-2">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-send-money-title{{ language.language_id }}">{{ entry_send_money_title }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{language.language_id}}][send_money_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].send_money_text : '' }}" placeholder="{{ entry_send_money_title }}" id="input-send-money-title" class="form-control" />
+                            {% if error_send_money_text[language.language_id] %}
+                            <div class="text-danger">{{ error_send_money_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-2">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-withdraw-money-title{{ language.language_id }}">{{ entry_withdraw_money_title }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{language.language_id}}][withdraw_money_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].withdraw_money_text : '' }}" placeholder="{{ entry_withdraw_money_title }}" id="input-withdraw-money-title" class="form-control" />
+                            {% if error_withdraw_money_text[language.language_id] %}
+                            <div class="text-danger">{{ error_withdraw_money_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-3">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-voucher-title{{ language.language_id }}">{{ entry_voucher_title }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{language.language_id}}][voucher_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].voucher_text : ''  }}" placeholder="{{ entry_voucher_title }}" id="input-voucher-title" class="form-control" />
+                            {% if error_voucher_text[language.language_id] %}
+                            <div class="text-danger">{{ error_voucher_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-3">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-bank-title{{ language.language_id }}">{{ entry_bank_detail_title }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{language.language_id}}][bank_detail_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].bank_detail_text : ''  }}" placeholder="{{ entry_bank_detail_title }}" id="input-bank-detail-title" class="form-control" />
+                            {% if error_bank_detail_text[language.language_id] %}
+                            <div class="text-danger">{{ error_bank_detail_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-payment_method_title{{ language.language_id }}">{{ entry__wallet_payment_title }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{ language.language_id }}][payment_method_title]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].payment_method_title : '' }}" placeholder="{{ entry__wallet_payment_title }}" id="input-payment_method_title{{ language.language_id }}" class="form-control"/>
+                            {% if error_payment_method_title[language.language_id] %}
+                            <div class="text-danger">{{ error_payment_method_title[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-total_title{{ language.language_id }}">{{ entry_total_title }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{ language.language_id }}][total_title]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].total_title : '' }}" placeholder="{{ entry_total_title }}" id="input-total_title{{ language.language_id }}" class="form-control" />
+                            {% if error_total_title[language.language_id] %}
+                            <div class="text-danger">{{ error_total_title[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                          <label class="col-xs-12 control-label" for="input-half_payment_line{{ language.language_id }}">
+                            {{ entry_half_payment_line }}
+                          </label>
+                          <div class="col-xs-12">
+                            <textarea class="note-editable" name="module_e_wallet_language[{{ language.language_id }}][half_payment_line]" data-toggle="summernote" data-lang="{{ summernote }}"  placeholder="{{ entry_half_payment_line }}" id="input-half_payment_line{{ language.language_id }}">{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].half_payment_line }}</textarea>
+                            {% if error_half_payment_line[language.language_id] %}
+                            <div class="text-danger">{{ error_half_payment_line[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="col-xs-12">
+                            <span class="example_note">
+                              <span class="top_text">{{ entry_note_text }}:</span>
+                              <ul>
+                                <li>{{ entry_order_total }}</li>
+                                <li>{{ entry_wallet_total }}</li>
+                                <li>{{ entry_remain_chat }}</li>
+                              </ul>
+                              <span class="example">{{ entry_example_text }}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                          <label class="col-xs-12 control-label" for="input-full_payment_line{{ language.language_id }}">
+                            {{ entry_full_payment_line }}
+                          </label>
+                          <div class="col-xs-12">
+                            <textarea class="note-editable" name="module_e_wallet_language[{{ language.language_id }}][full_payment_line]"  data-toggle="summernote" data-lang="{{ summernote }}"  placeholder="{{ entry_full_payment_line }}" id="input-full_payment_line{{ language.language_id }}">{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].full_payment_line }}</textarea>
+                            {% if error_full_payment_line[language.language_id] %}
+                            <div class="text-danger">{{ error_full_payment_line[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="col-xs-12">
+                            <span class="example_note">
+                              <span class="example">{{ entry_sufficent_msg }}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                          <label class="col-xs-12 control-label" for="input-email_header_text{{ language.language_id }}">
+                            {{ entry_header_title }}
+                          </label>
+                          <div class="col-xs-12">
+                            <textarea name="module_e_wallet_language[{{ language.language_id }}][email_header_text]" rows="10" cols="75" placeholder="{{ entry_header_title }}" id="input-email_header_text{{ language.language_id }}">{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].email_header_text }}</textarea>
+                            {% if error_email_header_text[language.language_id] %}
+                            <div class="text-danger">{{ error_email_header_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="col-xs-12">
+                            <span class="example_note">
+                              <span class="example">{{ entry_header_text_note }}</span>
+                            </span>
+                          </div>
+                        </div>
+                     </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                          <label class="col-xs-12 control-label" for="input-email_footer_text{{ language.language_id }}">
+                            {{ entry_footer_title }}
+                          </label>
+                          <div class="col-xs-12">
+                            <textarea name="module_e_wallet_language[{{ language.language_id }}][email_footer_text]" rows="10" cols="75" placeholder="{{ entry_footer_title }}" id="input-email_footer_text{{ language.language_id }}">{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].email_footer_text }}</textarea>
+                            {% if error_email_footer_text[language.language_id] %}
+                            <div class="text-danger">{{ error_email_footer_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="col-xs-12">
+                            <span class="example_note">
+                              <span class="example">{{ entry_footer_text_note }}</span>
+                            </span>
+                          </div>
+                        </div>
+                     </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xs-12 col-sm-3">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-voucher-title{{ language.language_id }}">{{ entry_add_confirm_msg }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{language.language_id}}][add_confirm_string_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_confirm_string_text : ''  }}" placeholder="{{ entry_add_confirm_msg }}" id="input-voucher-title" class="form-control" />
+                            {% if error_add_confirm_string_text[language.language_id] %}
+                            <div class="text-danger">{{ error_add_confirm_string_text[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="col-xs-12">
+                            <span class="example_note">
+                              <ul>
+                                <li>{{ entry_add_money_text_string }}</li>
+                                <li>{{ entry_wallet_text }}</li>
+                              </ul>
+                              <span class="example">{{ entry_add_confirm_example_text }}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-3">
+                        <div class="form-group required">
+                          <label class="col-xs-12 control-label" for="input-sufficient-msg-title{{ language.language_id }}">{{ entry_sufficient_msg }}</label>
+                          <div class="col-xs-12">
+                            <input type="text" name="module_e_wallet_language[{{language.language_id}}][sufficient_msg]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].sufficient_msg: '' }}" placeholder="{{ entry_sufficient_msg }}" id="input-send-money-title-text" class="form-control" />
+                            {% if error_sufficient_msg[language.language_id] %}
+                            <div class="text-danger">{{ error_sufficient_msg[language.language_id] }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="col-xs-12">
+                            <span class="example_note">
+                              <ul>
+                                <li>{{ entry_wallet_text }}</li>
+                              </ul>
+                              <span class="example">{{ entry_sufficient_msg_note }}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-3">
+                          <div class="form-group required">
+                            <label class="col-xs-12 control-label" for="input-sufficient-msg-title{{ language.language_id }}">{{ entry_invalid_method }}</label>
+                            <div class="col-xs-12">
+                              <input type="text" name="module_e_wallet_language[{{language.language_id}}][invalid_method]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].invalid_method: '' }}" placeholder="{{ entry_invalid_method }}" id="input-invalid-method-text" class="form-control" />
+                              {% if error_invalid_method[language.language_id] %}
+                              <div class="text-danger">{{ error_invalid_method[language.language_id] }}</div>
+                              {% endif %}
+                            </div>
+                            <div class="col-xs-12">
+                              <span class="example_note">
+                                <span class="example">{{ entry_invalid_paymnet_method_note }}</span>
+                              </span>
+                            </div>
+                          </div>
+                      </div>
+                   </div>
+                   <fieldset class="well well-sm">
+                    <legend class="mb0">{{ entry_string_data_details }}</legend>
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-money-string-title{{ language.language_id }}">{{ entry_add_money_string_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][add_money_string_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_money_string_text : ''  }}" placeholder="{{ entry_add_money_title }}" id="input-add-money-string-title" class="form-control" />
+                                  {% if error_add_money_string_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_money_string_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_add_money_text_string }}</li>
+                                      <li>{{ entry_wallet_text }}</li>
+                                     <!--  <li>{{ entry_amount_text }}</li> -->
+                                    </ul>
+                                    <pre class="example">{{ entry_add_example_text }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-send-money-string-title{{ language.language_id }}">{{ entry_send_money_string_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][send_money_string_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].send_money_string_text : '' }}" placeholder="{{ entry_send_money_string_text }}" id="input-send-money-string-title" class="form-control" />
+                                  {% if error_send_money_string_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_send_money_string_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_send_text }}</li>
+                                      <li>{{ entry_name_text }}</li>
+                                      <li>{{ entry_email_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_send_example_text }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-withdraw-money-string-title{{ language.language_id }}">{{ entry_withdraw_money_string_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][withdraw_string_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].withdraw_string_text : '' }}" placeholder="{{ entry_withdraw_money_string_text }}" id="input-withdraw-money-string-title" class="form-control" />
+                                  {% if error_withdraw_string_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_withdraw_string_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_withdraw_data_text }}</li>
+                                      <li>{{ entry_e_title }}</li>
+                                      <li>{{ entry_balance_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_withdraw_example_text }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-paid-order-id-text{{ language.language_id }}">{{ entry_paid_orderid_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][order_id_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].order_id_text : ''  }}" placeholder="{{ entry_paid_orderid_text }}" id="input-paid-order-id-text" class="form-control" />
+                                  {% if error_order_id_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_order_id_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_order_id }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_orderid_msg }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-refund-string-title{{ language.language_id }}">{{ entry_refund_amount_string_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][refund_string_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].refund_string_text : '' }}" placeholder="{{ entry_refund_amount_string_text }}" id="input-refund-string-title" class="form-control" />
+                                  {% if error_refund_string_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_refund_string_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_order_id }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_refund_orderid_msg }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-approve-text{{ language.language_id }}">{{ entry_request_add_money_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][approve_request_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].approve_request_text : '' }}" placeholder="{{ entry_request_add_money_text }}" id="input-approve-text" class="form-control" />
+                                  {% if error_approve_request_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_approve_request_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_add_money_text_string }}</li>
+                                      <li>{{ entry_amount_text }}</li>
+                                      <li>{{ entry_method_title }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_request_approved_msg }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-receive-money-string-text{{ language.language_id }}">{{ entry_receive_money_string_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][receive_money_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].receive_money_text : '' }}" placeholder="{{ entry_receive_money_string_text }}" id="input-receive-money-string-text" class="form-control" />
+                                  {% if error_receive_money_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_receive_money_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_firstname_text }}</li>
+                                      <li>{{ entry_lastname_text }}</li>
+                                      <li>{{ entry_email_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_receive_money_msg }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                           <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-req_approve_text{{ language.language_id }}">{{ entry_request_aproove_text }}</label>
+                                <div class="col-xs-12">
+                                  <input type="text" name="module_e_wallet_language[{{language.language_id}}][req_aproove_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].req_aproove_text : '' }}" placeholder="{{ entry_request_aproove_text }}" id="input-req_approve_text" class="form-control" />
+                                  {% if error_req_aproove_text[language.language_id] %}
+                                  <div class="text-danger">{{ error_req_aproove_text[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_description_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_request_aprove_string }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-3">
+                          <div class="row">
+                            <div class="form-group required">
+                              <label class="col-xs-12 control-label" for="input-req_reject_text{{ language.language_id }}">{{ entry_request_reject_text }}</label>
+                              <div class="col-xs-12">
+                                <input type="text" name="module_e_wallet_language[{{language.language_id}}][req_reject_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].req_reject_text : '' }}" placeholder="{{ entry_request_reject_text }}" id="input-req_reject_text" class="form-control" />
+                                {% if error_req_reject_text[language.language_id] %}
+                                <div class="text-danger">{{ error_req_reject_text[language.language_id] }}</div>
+                                {% endif %}
+                              </div>
+                              <div class="col-xs-12">
+                                <span class="example_note">
+                                  <ul>
+                                    <li>{{ entry_description_text }}</li>
+                                  </ul>
+                                  <pre class="example">{{ entry_request_reject_string }}</pre>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                          <div class="row">
+                            <div class="form-group required">
+                              <label class="col-xs-12 control-label" for="input-add_voucher_text{{ language.language_id }}">{{ entry_add_voucher_text }}</label>
+                              <div class="col-xs-12">
+                                <input type="text" name="module_e_wallet_language[{{language.language_id}}][add_voucher_text]" value="{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_voucher_text : '' }}" placeholder="{{ entry_add_voucher_text }}" id="input-add_voucher_text" class="form-control" />
+                                {% if error_add_voucher_text[language.language_id] %}
+                                <div class="text-danger">{{ error_add_voucher_text[language.language_id] }}</div>
+                                {% endif %}
+                              </div>
+                              <div class="col-xs-12">
+                                <span class="example_note">
+                                  <ul>
+                                    <li>{{ enter_v_text }}</li>
+                                  </ul>
+                                  <pre class="example">{{ entry_voucher_string }}</pre>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                   </fieldset>
+                   <fieldset class="well well-sm">
+                    <legend class="mb0">{{ entry_email_data_details }}</legend>
+                       <div class="row">
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-transaction-email-sub{{ language.language_id }}">{{ entry_add_transaction_email_sub }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][add_transaction_email_sub]"rows="4" cols="30" placeholder="{{ entry_add_transaction_email_sub }}" id="input-add-transaction-email-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_transaction_email_sub : ''}}</textarea>
+                                  {% if error_add_transaction_email_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_transaction_email_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_wallet_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_transaction_email_msg }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-transaction-mail-msg{{ language.language_id }}">{{ entry_add_transaction_email_msg }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][transaction_mail_msg]" rows="4" cols="30" placeholder="{{ entry_add_transaction_email_msg }}" id="input-transaction-mail-msg" class="form-control" />{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].transaction_mail_msg : '' }}</textarea>
+                                  {% if error_transaction_mail_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_transaction_mail_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_description_text }}</li>
+                                      <li>{{ entry_balance_text }}</li>
+                                      <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_email_note_msg }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-receive-money-email-sub{{ language.language_id }}">{{ entry_receive_money_email_sub }}</label>
+                                <div class="col-xs-12">
+                                  <textarea  name="module_e_wallet_language[{{language.language_id}}][receive_money_email_sub]" rows="4" cols="30"  placeholder="{{ entry_receive_money_email_sub }}" id="input-receive-money-email-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].receive_money_email_sub : ''  }}</textarea>
+                                  {% if error_receive_money_email_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_receive_money_email_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_e_title }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_receive_money_email_note }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-receive-email-msg{{ language.language_id }}">{{ entry_receive_email_msg }}</label>
+                                <div class="col-xs-12">
+                                  <textarea type="text" rows="4" cols="30" name="module_e_wallet_language[{{language.language_id}}][receive_email_msg]" placeholder="{{ entry_receive_email_msg }}" id="input-receive-email-msg" class="form-control" />{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].receive_email_msg : '' }}</textarea>
+                                  {% if error_receive_email_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_receive_email_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_firstname_text }}</li>
+                                      <li>{{ entry_email_text }}</li>
+                                      <li>{{ entry_balance_text }}</li>
+                                      <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_receive_note }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       </div>
+                       <div class="row">
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-user-sub{{ language.language_id }}">{{ entry_addmail_sub_user }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][add_user_sub]"  placeholder="{{ entry_addmail_sub_user }}" rows="4" cols="30" id="input-add-user-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_user_sub : ''  }}</textarea>
+                                  {% if error_add_user_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_user_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_wallet_title }}</li>
+                                      <li>{{ entry_add_money_text_string }}</li>
+                                      <li>{{ entry_status_approve }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_add_money_subject }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-user-msg{{ language.language_id }}">{{ entry_addmail_msg_user }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][add_user_msg]"  placeholder="{{ entry_addmail_msg_user }}" rows="4" cols="30" id="input-add-user-msg" class="form-control" />{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_user_msg: '' }}</textarea>
+                                  {% if error_add_user_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_user_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_status_approve }}</li>
+                                      <li>{{ entry_description_text }}</li>
+                                      <li>{{ entry_amount_data }}</li>
+                                      <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_add_money_message }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-withdraw-user-sub{{ language.language_id }}">{{ entry_withdraw_mail_sub_user }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][withdraw_user_sub]"  placeholder="{{ entry_withdraw_mail_sub_user }}" rows="4" cols="30" id="input-withdraw-user-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].withdraw_user_sub : ''  }}</textarea>
+                                  {% if error_withdraw_user_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_withdraw_user_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_wallet_title }}</li>
+                                      <li>{{ entry_withdraw_title_subject }}</li>
+                                      <li>{{ entry_status_approve }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_withdraw_subject }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-withdraw-user-msg{{ language.language_id }}">{{ entry_withdraw_mail_msg_user }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][withdraw_user_msg]"  placeholder="{{ entry_withdraw_mail_msg_user }}" rows="4" cols="30" id="input-withdraw-user-msg" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].withdraw_user_msg : ''  }}</textarea>
+                                  {% if error_withdraw_user_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_withdraw_user_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                       <li>{{ entry_status_approve }}</li>
+                                       <li>{{ entry_description_text }}</li>
+                                       <li>{{ entry_amount_data }}</li>
+                                       <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_withdraw_message }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       </div>
+                       <div class="row">
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-send-data-sub{{ language.language_id }}">{{ entry_send_data_sub }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][send_data_sub]"  placeholder="{{ entry_send_data_sub }}" rows="4" cols="30" id="input-send-data-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].send_data_sub : ''  }}</textarea>
+                                  {% if error_send_data_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_send_data_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_email_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_send_data_note }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-send-money-msg{{ language.language_id }}">{{ entry_send_data_msg }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][send_money_msg]" rows="4" cols="30" placeholder="{{ entry_send_data_msg }}" id="input-send-money-msg" class="form-control" />{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].send_money_msg: '' }}</textarea>
+                                  {% if error_send_money_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_send_money_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_s_data_text }}</li>
+                                      <li>{{ entry_name_text }}</li>
+                                      <li>{{ entry_email_text }}</li>
+                                      <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_send_data_msg_note }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-notify-email-sub{{ language.language_id }}">{{ entry_notify_customer_sub }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][notify_email_sub]" rows="4" cols="30" placeholder="{{ entry_notify_customer_sub }}" id="input-notify-email-sub" class="form-control" />{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].notify_email_sub: '' }}</textarea>
+                                  {% if error_notify_email_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_notify_email_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_wallet_title }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_notify_customer_subject }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-notify-email-msg{{ language.language_id }}">{{ entry_notify_customer_msg }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][notify_email_msg]" rows="4" cols="30" placeholder="{{ entry_notify_customer_msg }}" id="input-notify-email-msg" class="form-control" />{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].notify_email_msg: '' }}</textarea>
+                                  {% if error_notify_email_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_notify_email_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_e_title }}</li>
+                                      <li>{{ entry_description_text }}</li>
+                                      <li>{{ entry_email_text }}</li>
+                                      <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_notify_customer_message }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       </div>
+                       <div class="row">
+                         <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-money-req-sub{{ language.language_id }}">{{ entry_add_money_req_sub }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][add_money_req_sub]"  placeholder="{{ entry_add_money_req_sub }}" rows="4" cols="30" id="input-add-money-req-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_money_req_sub : ''  }}</textarea>
+                                  {% if error_add_money_req_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_money_req_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <pre class="example">{{ entry_add_money_request_subject }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                         </div>
+                         <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-money-req-msg{{ language.language_id }}">{{ entry_add_money_req_msg }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][add_money_req_msg]"  placeholder="{{ entry_add_money_req_msg }}" rows="4" cols="30" id="input-add-money-req-msg" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_money_req_msg : ''  }}</textarea>
+                                  {% if error_add_money_req_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_money_req_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_description_text }}</li>
+                                      <li>{{ entry_amount_data }}</li>
+                                      <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_add_money_request_message }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                         </div>
+                       </div>
+                   </fieldset>
+                   <fieldset class="well well-sm">
+                      <legend>{{ entry_admin_email_text }}</legend>
+                      <div class="row">
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-setting-sub{{ language.language_id }}">{{ entry_addmail_sub_admin }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][add_setting_sub]"  placeholder="{{ entry_addmail_sub_admin }}" rows="4" cols="30" id="input-add-setting-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_setting_sub : ''  }}</textarea>
+                                  {% if error_add_setting_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_setting_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_wallet_title }}</li>
+                                      <li>{{ entry_add_money_text_string }}</li>
+                                      <li>{{ entry_status_approve }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_add_money_subject }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-add-setting-msg{{ language.language_id }}">{{ entry_addmail_msg_admin }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][add_setting_msg]"  placeholder="{{ entry_addmail_msg_admin }}" rows="4" cols="30" id="input-add-setting-msg" class="form-control" />{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].add_setting_msg: '' }}</textarea>
+                                  {% if error_add_setting_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_add_setting_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_add_money_text_string }}</li>
+                                      <li>{{ entry_status_approve }}</li>
+                                      <li>{{ entry_description_text }}</li>
+                                      <li>{{ entry_amount_data }}</li>
+                                      <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_add_money_message_setting }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-withdraw-setting-sub{{ language.language_id }}">{{ entry_withdraw_mail_sub_admin }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][withdraw_setting_sub]" rows="4" cols="30" placeholder="{{ entry_withdraw_mail_sub_admin }}" id="input-withdraw-setting-sub" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].withdraw_setting_sub : ''  }}</textarea>
+                                  {% if error_withdraw_setting_sub[language.language_id] %}
+                                  <div class="text-danger">{{ error_withdraw_setting_sub[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                      <li>{{ entry_wallet_title }}</li>
+                                      <li>{{ entry_withdraw_data_text }}</li>
+                                      <li>{{ entry_status_approve }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_withdraw_subject }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-3">
+                            <div class="row">
+                              <div class="form-group required">
+                                <label class="col-xs-12 control-label" for="input-withdraw-setting-msg{{ language.language_id }}">{{ entry_withdraw_mail_msg_admin }}</label>
+                                <div class="col-xs-12">
+                                  <textarea name="module_e_wallet_language[{{language.language_id}}][withdraw_setting_msg]" rows="4" cols="30" placeholder="{{ entry_withdraw_mail_msg_admin }}" id="input-withdraw-setting-msg" class="form-control"/>{{ e_wallet_language[language.language_id] ? e_wallet_language[language.language_id].withdraw_setting_msg : ''  }}</textarea>
+                                  {% if error_withdraw_setting_msg[language.language_id] %}
+                                  <div class="text-danger">{{ error_withdraw_setting_msg[language.language_id] }}</div>
+                                  {% endif %}
+                                </div>
+                                <div class="col-xs-12">
+                                  <span class="example_note">
+                                    <ul>
+                                       <li>{{ entry_withdraw_data_text }}</li>
+                                       <li>{{ entry_status_approve }}</li>
+                                       <li>{{ entry_description_text }}</li>
+                                       <li>{{ entry_date_text }}</li>
+                                    </ul>
+                                    <pre class="example">{{ entry_withdraw_setting_msg }}</pre>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                   </fieldset>
+                  </div>
+                  {% set active_is = active_is + 1 %}
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-option">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-setting-mail">{{ entry_transaction_admin_email }}</label>
+                      <div class="col-xs-12">
+                        <input type="text" name="module_e_wallet_setting_mail" value="{{ e_wallet_setting_mail }}" placeholder="{{ entry_setting_mail }}" id="input_setting_mail" class="form-control">
+                         {% if error_setting_mail %}
+                          <div class="text-danger">{{ error_setting_mail }}</div>
+                          {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <fieldset class="well well-sm">
+                  <legend class="mb0">{{ entry_add_money_text }}</legend>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label class="col-xs-12 control-label" for="input-min_add">{{ entry_min_add }}</label>
+                        <div class="col-xs-12">
+                          <input type="number" name="module_e_wallet_min_add" value="{{ e_wallet_min_add }}" placeholder="{{ entry_min_add }}" id="input-min_add" class="form-control" />
+                          {% if error_min_add %}
+                          <div class="text-danger">{{ error_min_add }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label class="col-xs-12 control-label" for="input-max_add">{{ entry_max_add }}</label>
+                        <div class="col-xs-12">
+                          <input type="number" name="module_e_wallet_max_add" value="{{ e_wallet_max_add }}" placeholder="{{ entry_max_add }}" id="input-max_add" class="form-control" />
+                          {% if error_max_add %}
+                          <div class="text-danger">{{ error_max_add }}</div>
+                          {% endif %}
+                        </div> 
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="well well-sm">
+                  <legend class="mb0">{{ entry_send_money_text }}</legend>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label class="col-xs-12 control-label" for="input-min_send">{{ entry_min_send }}</label>
+                        <div class="col-xs-12">
+                          <input type="number" name="module_e_wallet_min_send" value="{{ e_wallet_min_send }}" placeholder="{{ entry_min_send }}" id="input-min_send" class="form-control" />
+                          {% if error_min_send %}
+                          <div class="text-danger">{{ error_min_send }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label class="col-xs-12 control-label" for="input-max_send">{{ entry_max_send }}</label>
+                        <div class="col-xs-12">
+                          <input type="number" name="module_e_wallet_max_send" value="{{ e_wallet_max_send }}" placeholder="{{ entry_max_send }}" id="input-max_send" class="form-control" />
+                          {% if error_max_send %}
+                          <div class="text-danger">{{ error_max_send }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="well well-sm">
+                  <legend class="mb0">{{ entry_withdraw_text }}</legend>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label class="col-xs-12 control-label" for="input-min_send">{{ entry_min_withdraw }}</label>
+                        <div class="col-xs-12">
+                          <input type="number" name="module_e_wallet_min_withdraw" value="{{ e_wallet_min_withdraw }}" placeholder="{{ entry_min_withdraw }}" id="input-min_send" class="form-control" />
+                          {% if error_min_withdraw %}
+                          <div class="text-danger">{{ error_min_withdraw }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label class="col-xs-12 control-label" for="input-max_send">{{ entry_max_withdraw }}</label>
+                        <div class="col-xs-12">
+                          <input type="number" name="module_e_wallet_max_withdraw" value="{{ e_wallet_max_withdraw }}" placeholder="{{ entry_max_withdraw }}" id="input-max_send" class="form-control" />
+                          {% if error_max_withdraw %}
+                          <div class="text-danger">{{ error_max_withdraw }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-4">
+                    <div class="row">
+                      <label class="col-xs-12 control-label" for="input-complete_status">{{ entry_complete_status }}</label>
+                      {% if error_complete_status %}
+                      <div class="text-danger">{{ error_complete_status }}</div>
+                      {% endif %}
+                      <div class="col-xs-12">
+                        <div class="well well-sm" style="min-height: 150px; overflow: auto;columns: 50px 3;">
+                          {% if order_statuses %}
+                          {% for order_statuse in order_statuses %}
+                          <div class="">
+                            <label>
+                              {% if e_wallet_complete_status is iterable and order_statuse.order_status_id in e_wallet_complete_status %}                            
+                              <input type="checkbox" name="module_e_wallet_complete_status[]" value="{{ order_statuse.order_status_id }}" checked="checked" />&nbsp;
+                              {{ order_statuse.name }}
+                              {% else %}
+                              <input type="checkbox" name="module_e_wallet_complete_status[]'}}" value="{{ order_statuse.order_status_id }}" />&nbsp;
+                              {{ order_statuse.name }}
+                              {% endif %}                              
+                            </label>
+                          </div>
+                          {% endfor %}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-4">
+                    <div class="row">
+                      <label class="col-xs-12 control-label" for="input-processing_status">{{ entry_processing_status }}</label>
+                      {% if error_processing_status %}
+                      <div class="text-danger">{{ error_processing_status }}</div>
+                      {% endif %}
+                      <div class="col-xs-12">
+                        <div class="well well-sm" style="min-height: 150px; overflow: auto;columns: 50px 3;">
+                          {% if order_statuses %}
+                          {% for order_statuse in order_statuses %}
+                          <div class="">
+                            <label>
+                              {% if e_wallet_processing_status is iterable and order_statuse.order_status_id in e_wallet_processing_status %}
+                              <input type="checkbox" name="module_e_wallet_processing_status[]" value="{{ order_statuse.order_status_id }}" checked="checked" />&nbsp;
+                              {{ order_statuse.name }}
+                              {% else %}
+                              <input type="checkbox" name="module_e_wallet_processing_status[]" value="{{ order_statuse.order_status_id }}" />&nbsp;
+                              {{ order_statuse.name }}
+                              {% endif %}
+                            </label>
+                          </div>
+                          {% endfor %}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-4">
+                    <div class="row">
+                      <label class="col-xs-12 control-label" for="input-refund_order_id">{{ entry_refund_order_id }}</label>
+                      {% if error_refund_order_id %}
+                      <div class="text-danger">{{ error_refund_order_id }}</div>
+                      {% endif %}
+                      <div class="col-xs-12">
+                        <div class="well well-sm" style="min-height: 150px; overflow: auto;columns: 50px 3;">
+                          {% if order_statuses %}
+                          {% for order_statuse in order_statuses %}
+                          <div class="">
+                            <label>
+                              {% if e_wallet_refund_order_id is iterable and order_statuse.order_status_id in e_wallet_refund_order_id %}
+                              <input type="checkbox" name="module_e_wallet_refund_order_id[]" value="{{ order_statuse.order_status_id }}" checked="checked" />&nbsp;
+                              {{ order_statuse.name }}
+                              {% else %}
+                              <input type="checkbox" name="module_e_wallet_refund_order_id[]" value="{{ order_statuse.order_status_id }}" />&nbsp;
+                              {{ order_statuse.name }}
+                              {% endif %}
+                            </label>
+                          </div>
+                          {% endfor %}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="row">
+                      <label class="col-xs-12 control-label" for="input-payments">{{ entry_payments }}</label>
+                      <div class="col-xs-12">
+                        <div class="well well-sm" style="height: 150px; overflow: auto;">
+                          {% if payments %}
+                          {% for code, payment in payments %}                        
+                          {% if not (payment == 'e_wallet_payment') %}
+                          <div class="checkbox">
+                            <label>
+                              {% if e_wallet_payments is iterable and  code in e_wallet_payments %}                           
+                              <input type="checkbox" name="module_e_wallet_payments[]" value="{{ code }}" checked="checked" />&nbsp;
+                              {{ payment }}
+                              {% else %}
+                              <input type="checkbox" name="module_e_wallet_payments[]" value="{{ code }}" />&nbsp;
+                              {{ payment }}
+                              {% endif %}
+                            </label>
+                          </div>
+                          {% endif %}
+                          {% endfor %}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="row">
+                      <label class="col-xs-12 control-label" for="input-payments">{{ entry_checkout_payments }}</label>
+                      <div class="col-xs-12">
+                        <div class="well well-sm" style="height: 150px; overflow: auto;">
+                          {% if payments %}
+                          {% for code, payment in payments %}   
+                          {% if not (payment == 'e_wallet_payment') %}
+                          <div class="checkbox">
+                            <label>
+                              {% if e_wallet_checkout_payments is iterable and code in e_wallet_checkout_payments %}
+                              <input type="checkbox" name="module_e_wallet_checkout_payments[]" value="{{ code }}" checked="checked" />&nbsp;
+                              {{ payment }}
+                              {% else %}
+                              <input type="checkbox" name="module_e_wallet_checkout_payments[]" value="{{ code }}" />&nbsp;
+                              {{ payment }}
+                              {% endif %}
+                            </label>
+                          </div>
+                          {% endif %}
+                          {% endfor %}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-image">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-3">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-icon">{{ entry_icon }}</label>
+                      <div class="col-sm-10">
+                        <a href="" id="thumb-icon" data-toggle="image" class="img-thumbnail"><img src="{{ icon_thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                        <input type="hidden" name="module_e_wallet_icon" value="{{ e_wallet_icon }}" id="input-icon" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3">
+                    <div class="form-group">
+                      <label class="col-xs-12 control-label" for="input-image">{{ entry_image }}</label>
+                      <div class="col-sm-10">
+                        <a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ image_thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                        <input type="hidden" name="module_e_wallet_image" value="{{ e_wallet_image }}" id="input-image" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style type="text/css">
+    .m0{margin: 0;}
+    .mb0{margin-bottom: 0;}
+  </style>
+  <script type="text/javascript">
+    {% for language in languages %}
+      $('#input-half_payment_line{{ language.language_id }}').summernote({height: 170});
+      $('#input-full_payment_line{{ language.language_id }}').summernote({height: 170});
+    {% endfor %}
+  </script>
+  {{ footer }}

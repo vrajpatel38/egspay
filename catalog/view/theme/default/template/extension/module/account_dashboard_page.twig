@@ -1,0 +1,24 @@
+<div class="account-left-menu">
+  <h2>{{ text_my_account }}</h2>
+  <ul class="list-unstyled">
+    <li><i class="fa fa-user"></i><a href="{{ edit }}">{{ text_edit }}</a></li>
+    <li><i class="fa fa-unlock-alt"></i><a href="{{ password }}">{{ text_password }}</a></li>
+    <li><i class="fa fa-home"></i><a href="{{ address }}">{{ text_address }}</a></li>
+    <li><i class="fa fa-heart"></i><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+  </ul>
+  <h2>{{ text_my_orders }}</h2>
+  <ul class="list-unstyled">
+    <li><i class="fa fa-shopping-cart"></i><a href="{{ order }}">{{ text_order }}</a></li>
+    <li><i class="fa fa-arrow-circle-down"></i><a href="{{ download }}">{{ text_download }}</a></li>
+    {% if reward %}
+    <li><i class="fa fa-mail-reply"></i><a href="{{ reward }}">{{ text_reward }}</a></li>
+    {% endif %}
+    <li><i class="fa fa-undo"></i><a href="{{ return }}">{{ text_return }}</a></li>
+    <li><i class="fa fa-money"></i><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+    <li><i class="fa fa-recycle"></i><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+  </ul>
+  <h2>{{ text_my_newsletter }}</h2>
+  <ul class="list-unstyled">
+    <li><i class="fa fa-file-text-o "></i><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+  </ul>
+</div>

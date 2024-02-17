@@ -1,0 +1,83 @@
+{{ header }} {{ column_left }}
+<div id="content">
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-user"></i>Customer Details</h3>
+          </div>
+          <table class="table">
+            <tr>
+              <td style="width: 1%;"><button data-toggle="tooltip" title="{{ text_customer }}" class="btn btn-info btn-xs"><i class="fa fa-user fa-fw"></i></button></td>
+              <td>{% if q_data %} <a href="{{ customer }}" target="_blank">{{ q_data.name }}</a> {% else %}
+                  {{ name }} 
+                {% endif %}</td>
+            </tr>
+            <tr>
+              <td><button data-toggle="tooltip" title="{{ text_customer_group }}" class="btn btn-info btn-xs"><i class="fa fa-group fa-fw"></i></button></td>
+              <td>{{ q_data.city }}</td>
+            </tr>
+            <tr>
+              <td><button data-toggle="tooltip" title="{{ text_email }}" class="btn btn-info btn-xs"><i class="fa fa-envelope-o fa-fw"></i></button></td>
+              <td><a href="mailto:{{ q_data.email }}">{{ q_data.email }}</a></td>
+            </tr>
+            <tr>
+              <td><button data-toggle="tooltip" title="{{ text_telephone }}" class="btn btn-info btn-xs"><i class="fa fa-phone fa-fw"></i></button></td>
+              <td>{{ q_data.phone }}</td>
+            </tr>
+            <tr>
+              <td><button data-toggle="tooltip" title="{{ text_telephone }}" class="btn btn-info btn-xs"><i class="fa fa-comment"></i></button></td>
+              <td>{{ q_data.comment }}</td>
+            </tr>
+            <tr>
+              <td><button data-toggle="tooltip" title="{{ text_telephone }}" class="btn btn-info btn-xs"><i class="fa fa-download" aria-hidden="true"></i></button></td>
+              <td><a href="{{ q_data.href_file }}">{{ q_data.file }}</a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-info-circle"></i> {{ text_order }}</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <td class="text-left">Image</td>
+              <td class="text-left">Product Details</td>
+              <td class="text-left">Model</td>
+              <td class="text-left">Unit Price</td>
+              <td class="text-left">Quantity</td>
+              <td class="text-left">Total</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for quote_info in quote_info %}
+              <tr>
+                <td> <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ quote_info.image }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></td>
+                <td>
+                  <ul>
+                   <h4><a href="{{ quote_info.href }}" target="_blank">- {{ quote_info.product_name }}</a></h4>
+                     {% for quote_key in quote_info.quote_options %}
+                     {% for q_value in quote_key %}
+                      <li><small class="quote_option_json_data"><b>{{ q_value.name }}:</b></small><small>{{ q_value.value }}</small></li>
+                     {% endfor %}
+                    {% endfor %}
+                  </ul>
+                </td>
+                <td>{{ quote_info.model }}</td>
+                <td>{{ quote_info.price }}</td>
+                <td>{{ quote_info.quantity }}</td>
+                <td>{{ quote_info.total }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+</div>
+{{ footer }}

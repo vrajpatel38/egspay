@@ -1,0 +1,21 @@
+<?php
+$_['heading_title'] = 'Requesting an offer';
+$_['text_personal_data'] = 'Personal Data';
+$_['entry_name'] = 'Name';
+$_['entry_city'] = 'City';
+$_['entry_email'] = 'Email';
+$_['entry_phone'] = 'Phone';
+$_['text_product_data'] = 'I would like to request a quote for the following products:';
+$_['text_file_upload_data'] = 'Uploaded documents for requesting a quote:';
+$_['text_learn_more_data'] = 'Learn more about requesting a quote';
+$_['button_cancel'] = "I'm still browsing";
+$_['button_save'] = 'Request a quote';
+$_['text_error_name'] = 'Name must be between 3 and 32 characters!';
+$_['text_error_city'] = 'City must be between 3 and 32 characters!';
+$_['text_error_email'] = 'E-Mail Address does not appear to be valid!';
+$_['text_error_phone'] = 'Phone must be between 3 and 32 characters!';
+$_['text_error_file'] = 'Please Upload File!';
+$_['text_error_product_delete'] = 'Your product has been deleted!';
+$_['text_error_wrong_msg'] = 'You can not delete this product!';
+$_['text_error_comment'] = 'Comment must be between 3 and 32 characters!';
+$_['entry_comment'] = 'Comment';

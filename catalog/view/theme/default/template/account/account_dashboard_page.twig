@@ -1,0 +1,185 @@
+{{ header }}
+<div class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if success %}
+  <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+  {% endif %}
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div>
+        <div class="panel panel-default share account-page-body">
+          <div class="panel-heading panel-heading-gray title">Hi {{ customer_info.firstname }}..!</div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6 col-md-3">
+                  <div class="panel panel-primary">
+                      <div class="panel-heading">
+                          <div class="row">
+                              <div class="col-xs-3">
+                                  <i class="fa fa-heart fa-4x"></i>
+                              </div>
+                              <div class="col-xs-9 text-right right-5">
+                                  <div class="huge">{{ total_wishlist }}</div>
+                                  <div>{{ total_wish_list }}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <a href="{{ wishlist }}">
+                          <div class="panel-footer">
+                              <span class="pull-left">{{ view_details }}</span>
+                              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                              <div class="clearfix"></div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                  <div class="panel panel-green">
+                      <div class="panel-heading">
+                          <div class="row">
+                              <div class="col-xs-3">
+                                  <i class="fa fa-shopping-cart fa-4x"></i>
+                              </div>
+                              <div class="col-xs-9 text-right right-5">
+                                  <div class="huge">{{ order_total }}</div>
+                                  <div>{{ total_order }}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <a href="{{ order }}">
+                          <div class="panel-footer">
+                              <span class="pull-left">{{ view_details }}</span>
+                              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                              <div class="clearfix"></div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                  <div class="panel panel-yellow">
+                      <div class="panel-heading">
+                          <div class="row">
+                              <div class="col-xs-3">
+                                  <i class="fa fa-arrow-circle-down fa-4x"></i>
+                              </div>
+                              <div class="col-xs-9 text-right right-5">
+                                  <div class="huge">{{ download_total }}</div>
+                                  <div>{{ total_download }}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <a href="{{ download }}">
+                          <div class="panel-footer">
+                              <span class="pull-left">{{ view_details }}</span>
+                              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                              <div class="clearfix"></div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                  <div class="panel panel-red">
+                      <div class="panel-heading">
+                          <div class="row">
+                              <div class="col-xs-3">
+                                  <i class="fa fa-list-alt fa-4x"></i>
+                              </div>
+                              <div class="col-xs-9 text-right right-5">
+                                  <div class="huge">{{ orderproduct }} {{ (orderprice) }}</div>
+                                  <div>{{ order_product }}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <a href="{{ order }}">
+                          <div class="panel-footer">
+                              <span class="pull-left">{{ view_details }}</span>
+                              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                              <div class="clearfix"></div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+            </div>
+            <div class="row row-eq-height">
+              <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ entry_profile }}</div>
+                    <div class="panel-body">
+                      <div>{{ entry_firstname }} : {{ customer_info.firstname }} {{customer_info.lastname }}</div>
+                      <div>{{ entry_email }} : {{ customer_info.email }}</div>
+                      <div>{{ entry_telephone }} : {{ customer_info.telephone }}</div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">{{ title_address }}</div>
+                  <div class="panel-body">
+                    <address>
+                      {{ customer_info.address_1 }}<br>
+                      {{ customer_info.address_2 }}<br>
+                      {{ customer_info.city }}-{{ customer_info.postcode }}
+                    </address>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="panel panel-default">
+                <div class="panel-heading">{{ text_order }}</div>
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <td class="text-right">{{ column_order_id }}</td>
+                          <td class="text-left">{{ column_status }}</td>
+                          <td class="text-left">{{ column_date_added }}</td>
+                          <td class="text-right">{{ column_product }}</td>
+                          <td class="text-left">{{ column_customer }}</td>
+                          <td class="text-right">{{ column_total }}</td>
+                          <td></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if orders_info %}
+                          {% for order in orders_info %}
+                          <tr>
+                            <td class="text-right">#{{ order.order_id }}</td>
+                            <td class="text-left">{{ order.status }}</td>
+                            <td class="text-left">{{ order.date_added }}</td>
+                            <td class="text-right">{{ order.products }}</td>
+                            <td class="text-left">{{ order.name }}</td>
+                            <td class="text-right">{{ order.total }}</td>
+                            <td class="text-right"><a href="{{ order.href }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+                          </tr>
+                          {% endfor %}
+                        {% else %}
+                          <tr><td colspan="100%" class="text-center"><p>{{ text_empty }}</p></td></tr>
+                        {% endif %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ content_bottom }}
+    </div>
+    {{ column_right }}
+  </div>
+</div>
+{{ footer }}

@@ -1,0 +1,15 @@
+---------- Date: 2023-09-06 14:01:00 ~ IP : ::1 ----------
+REQUEST URI : /2200/admin/index.php?route=common/dashboard&token=ZiaRe0z2wtrIsZMshTbvLzRS1phmiFBO
+MOD DETAILS:
+   modFile   : D:\xampp\htdocs\2200\vqmod/xml/e_wallet.xml
+   id        : E Wallet
+   version   : 1.0.0.0
+   vqmver    : 
+   author    : Hitinfotech.com
+
+File Name    : admin/controller/common/dashboard.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): $sort_order = array();
+
+----------------------------------------------------------------------
+
+

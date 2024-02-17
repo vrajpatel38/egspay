@@ -1,0 +1,245 @@
+{{ header }}
+<style>
+    .personal-data-text p {
+        width: 100%;
+        border-bottom: 2px solid #333;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .product-data-text{
+        margin-top: 35px;
+    }
+    .product-data-text p{
+        width: 100%;
+        border-bottom: 2px solid #333;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .quote_option_json_data {
+        font-size: 1.5rem;
+    }
+    .file-upload-data-text{
+        width: 100%;
+        border-bottom: 2px solid #333;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .parent-div {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+    }
+    .parent-div input[type=file] {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        position: absolute;
+        font-size: 90px;
+    }
+    .learn-more-text p {
+        width: 100%;
+        border-bottom: 2px solid #333;
+        font-size: 20px;
+        margin-bottom: 70px;
+        margin-top: 15px;
+    }
+
+    .comment-more-text p {
+        width: 100%;
+        border-bottom: 2px solid #333;
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 15px;
+    }
+    .comment-more-text textarea{
+        margin-bottom: 15px;
+    }
+</style>
+<div id="quote_product_page" class="container">
+<h1 class="text-center">{{ heading_title }}</h1>
+<div class="row">
+    <div class="personal-data-text">
+        <p><b>{{ text_personal_data }}</b></p>
+    </div>
+</div>
+<div class="ajax_responce_container"></div>
+<form action="{{ action }}" method="post" enctype="multipart/form-data">
+  <div class="row">
+     <div class="col-sm-3">
+        <div class="form-group required">
+            <label class="control-label" for="name">{{ entry_name }}</label>
+            <input type="text" class="form-control" id="input-name" name="name" value="{{ name }}" placeholder="{{ entry_name }}">
+            {% if error_name %}
+            <div class="text-danger">{{ error_name }}</div>
+            {% endif %}
+        </div>
+     </div>
+     <div class="col-sm-3">
+        <div class="form-group required">
+            <label class="control-label" for="name">{{ entry_city }}</label>
+            <input type="text" class="form-control" id="input-city" name="city" value="{{ city }}" placeholder="{{ entry_city }}">
+            {% if error_city %}
+            <div class="text-danger">{{ error_city }}</div>
+            {% endif %}
+        </div>
+     </div>
+     <div class="col-sm-3">
+        <div class="form-group required">
+            <label class="control-label" for="name">{{ entry_email }}</label>
+            <input type="text" class="form-control" id="input-email" name="email" value="{{ email }}" placeholder="{{ entry_email }}">
+            {% if error_email %}
+            <div class="text-danger">{{ error_email }}</div>
+            {% endif %}
+        </div>
+     </div>
+     <div class="col-sm-3">
+        <div class="form-group required">
+            <label class="control-label" for="name">{{ entry_phone }}</label>
+            <input type="text" class="form-control" id="input-phone" name="phone" value="{{ phone }}" placeholder="{{ entry_phone }}">
+            {% if error_phone %}
+            <div class="text-danger">{{ error_phone }}</div>
+            {% endif %}
+        </div>
+     </div>
+  </div>
+<div class="row">
+    <div class="product-data-text">
+        <p><b>{{ text_product_data }}</b></p>
+    </div>
+</div>
+{% for product_data in product_data_info %}
+<div class="row">
+    <div class="col-sm-4">
+        {% if product_data.image %}
+        <ul class="thumbnails">
+            {% if product_data.image %}
+            <li><a class="thumbnail" href="{{ product_data.href }}" title="{{ heading_title }}"><img src="{{ product_data.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /><input type="hidden" name="product_image" value="{{ product_data.image }}"></a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+    <div class="col-sm-8">
+        <div>
+            <div class="set_product_name" style="float:left;"><h2>{{ product_data.name }}</h2></div>
+            <div class="delete btn" style="float:right;">
+                <a href="{{ delete }}" class="delete_product" data-product-id="{{ product_data.product_id }}"title="{{ button_delete }}"><i class="fa fa-trash-o"></i></a>
+            </div>
+        </div>
+        <div style="float:right;padding-top: 50px;">
+            {% for quote_key in product_data.quote_option_value_json %}
+                {% for q_value in quote_key %}
+                 <span class="quote_option_json_data"><b>{{ q_value.name }}:</b></span><span>{{ q_value.value }}</span><br/>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="row">
+    <div class="file-upload-data-text">
+        <p><b>{{ text_file_upload_data }}</b></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3 parent-div">
+       <button type="button" id="button-upload" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-block"><i class="fa fa-upload"></i> Upload a document</button>
+      <input type="hidden" name="quote_option_doc" value="" id="input-file" />  
+      {% if error_file %}
+        <div class="text-danger">{{ error_file }}</div>
+      {% endif %} 
+    </div>
+</div>
+<div class="row">
+    <div class="comment-more-text">
+        <p><b>{{ text_learn_more_data }}</b></p>
+          <textarea class="form-control" id="input-comment" name="comment" value="{{ comment }}" placeholder="{{ entry_comment }}"></textarea> 
+      {% if error_comment %}
+        <div class="text-danger">{{ error_comment }}</div>
+      {% endif %} 
+    </div>
+</div>
+<div class="row">
+    <div class="pull-right">
+        <a href="{{ cancel }}" class="btn btn-default">{{ button_cancel }}</a>
+        <button type="submit" class="btn btn-primary">{{ button_save }}</button>
+    </div>
+</div>
+</form>
+</div>
+{{ footer }}
+<script type="text/javascript">
+    $('button[id^=\'button-upload\']').on('click', function() {
+	var node = this;
+	$('#form-upload').remove();
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file"  name="file" /></form>');
+	$('#form-upload input[name=\'file\']').trigger('click');
+	if (typeof timer != 'undefined') {
+    	clearInterval(timer);
+	}
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
+
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$('.text-danger').remove();
+
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+
+					if (json['success']) {
+						alert(json['success']);
+
+						$(node).parent().find('input').val(json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+
+$(document).delegate(".delete_product","click",function(e){
+    // e.preventDefault();
+        var product_id = $(this).attr('data-product-id');  
+        $.ajax({
+            url: 'index.php?route=product/quote_data_page/deleteproductajax',
+            type:'POST',
+            dataType:'json',
+            data:{
+                'product_id': product_id
+            },
+            success:function(json){
+                if (json.success) {
+                    var html = '<div class="alert alert-success" role="alert">' + json.success + '</div>';
+                    jQuery(".ajax_responce_container").html(html); 
+                }
+                if (json.error) {
+                    var html = '<div class="alert alert-danger" role="alert">' + json.error + '</div>';
+                    jQuery(".ajax_responce_container").html(html);
+                }
+                // $('.quote_product_page').load('index.php?route=product/quote_data_page');
+                window.location.href = 'index.php?route=product/quote_data_page';
+                setTimeout(function() {
+                    jQuery(".ajax_responce_container").html('');
+                }, 3000);
+            },
+        })
+    });
+</script>
